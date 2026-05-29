@@ -16,3 +16,25 @@ document.addEventListener("DOMContentLoaded", () => {
             
         }
     });
+
+
+
+
+
+
+
+    document.addEventListener('DOMContentLoaded', () => {
+    const menuToggle = document.querySelector('.menu-toggle');
+    const header = document.querySelector('header');
+
+    if (menuToggle && header) {
+        menuToggle.addEventListener('click', () => {
+            // Alterna a animação do botão hambúrguer (vira X)
+            menuToggle.classList.toggle('active');
+            // Abre/fecha a gaveta do menu lateral
+            header.classList.toggle('active');
+        });
+    } else {
+        console.error("Erro: .menu-toggle ou header não foram encontrados no HTML.");
+    }
+});
