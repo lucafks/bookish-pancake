@@ -750,14 +750,17 @@ footer {
         border-bottom: none;
         padding: 40px 20px;
         z-index: 110;
-        transform: translateX(-100%) !important;
+        transform: translateX(-100%);
         opacity: 1 !important;
         visibility: visible !important;
+
+        user-select: none;
+        -webkit-user-select: none;
     }
 
     /* Quando ativado pelo clique no botão */
     header.active {
-        transform: translateX(0) !important;
+        transform: translateX(0);
         box-shadow: 20px 0 50px rgba(0, 0, 0, 0.9);
     }
 
