@@ -3,232 +3,295 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="midia/favicon-removebg-preview.png" type="image/x-icon">
-    <title>Forward Key Solutions</title>
+    <title>Desysis — Design Systems</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    
-    <div class="geo-bg-shape shape-1"></div>
-    <div class="geo-bg-shape shape-2"></div>
-    <div class="geo-bg-shape shape-3"></div>
-    
-    <!-- <header>
-        <nav>
-            <div class="logo-area" id="logoContainer" title="Clique para fazer upload da logo da FKS">
-                <img src="midia/WhatsApp_Image_2026-05-19_at_21.05.25-removebg-preview.png" alt="FKS Logo">
-            </div>
-            
-            <input type="file" id="logoUpload" accept="image/*" style="display: none;">
-            
-            <ul class="nav-links">
-                <li><a href="#home"><span class="nav-geo">▶</span> Início</a></li>
-                <li><a href="#sobre"><span class="nav-geo">▲</span> Quem Somos</a></li>
-                <li><a href="#diferenciais"><span class="nav-geo">■</span> Diferenciais</a></li>
-                <li><a href="#servicos"><span class="nav-geo">◆</span> Soluções & Valores</a></li>
-                <li><a href="#portfolio"><span class="nav-geo">●</span> Galeria de Projetos</a></li>
-                <li><a href="#contato"><span class="nav-geo">▼</span> Contato</a></li>
-            </ul>
-        </nav>
-    </header> -->
-    <!-- 1. O BOTÃO HAMBÚRGUER FICA FORA DO HEADER (Para não sumir no mobile) -->
-<button class="menu-toggle" aria-label="Abrir menu">
-    <span class="bar"></span>
-    <span class="bar"></span>
-    <span class="bar"></span>
-</button>
+    <div class="gradient-orb orb-1"></div>
+    <div class="gradient-orb orb-2"></div>
 
-<!-- 2. O HEADER (A gaveta que vai deslizar da esquerda) -->
-<header>
-    <nav>
-        <div class="logo-area" id="logoContainer" title="Clique para fazer upload da logo da FKS">
-            <img src="midia/WhatsApp_Image_2026-05-19_at_21.05.25-removebg-preview.png" alt="FKS Logo">
-        </div>
-        
-        <input type="file" id="logoUpload" accept="image/*" style="display: none;">
-        
-        <ul class="nav-links">
-            <li><a href="#home"><span class="nav-geo">▶</span> Início</a></li>
-            <li><a href="#sobre"><span class="nav-geo">▲</span> Quem Somos</a></li>
-            <li><a href="#diferenciais"><span class="nav-geo">■</span> Diferenciais</a></li>
-            <li><a href="#servicos"><span class="nav-geo">◆</span> Soluções &amp; Valores</a></li>
-            <li><a href="#portfolio"><span class="nav-geo">●</span> Galeria de Projetos</a></li>
-            <li><a href="#contato"><span class="nav-geo">▼</span> Contato</a></li>
-        </ul>
-    </nav>
-</header>
-    
-    <main class="main-content">
-        
-        <!-- HERO SECTION (ENTRADA IMPACTANTE DA EMPRESA) -->
+    <header class="header">
+        <nav class="nav">
+            <a href="#" class="logo">
+                <img src="midia/logoquadrada.png" alt="Desysis" class="logo-img">
+            </a>
+            <ul class="nav-links">
+                <li><a href="#home" class="nav-link active">Início</a></li>
+                <li><a href="#about" class="nav-link">Sobre</a></li>
+                <li><a href="#services" class="nav-link">Serviços</a></li>
+                <li><a href="#portfolio" class="nav-link">Produtos</a></li>
+                <li><a href="#contact" class="nav-link">Contato</a></li>
+            </ul>
+            <button class="menu-toggle" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+    </header>
+
+    <main>
         <section class="hero" id="home">
-            <div class="hero-wrapper">
-                <h1 class="brand-title">
-                    <span class="brand-line">Luca</span>
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-badge" data-animate="fade-up">
+                        <span class="badge-dot"></span>
+                        Design Systems & Brand Identity
+                    </div>
+                    <h1 class="hero-title" data-animate="fade-up" data-delay="100">
+                        <span class="title-line">Criamos</span>
+                        <span class="title-line title-gradient">Sistemas de Design</span>
+                        <span class="title-line">que Escalam</span>
+                    </h1>
+                    <p class="hero-description" data-animate="fade-up" data-delay="200">
+                        Transformamos ideias em ecossistemas visuais consistentes e escaláveis.
+                        Design systems sob medida que conectam sua marca em todos os pontos de contato.
+                    </p>
+                    <div class="hero-cta" data-animate="fade-up" data-delay="300">
+                        <a href="#contact" class="btn btn-primary">
+                            <span>Iniciar Projeto</span>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M5 12h14M12 5l7 7-7 7"/>
+                            </svg>
+                        </a>
+                        <a href="#portfolio" class="btn btn-ghost">
+                            <span>Produtos</span>
+                        </a>
+                    </div>
                     
-                    <span class="brand-line expand-container">
-                        <span class="word-block">
-                            <span class="letter-init highlight-purple">F</span>
-                            <span class="letter-rest">orward</span>
-                        </span>
-                        
-                        <span class="word-block">
-                            <span class="letter-init highlight-blue">K</span>
-                            <span class="letter-rest">ey</span>
-                        </span>
-                        
-                        <span class="word-block">
-                            <span class="letter-init highlight-purple">S</span>
-                            <span class="letter-rest">olutions</span>
-                        </span>
-                    </span>
-                </h1>
-                <p class="subtitle">Criação de Sites Profissionais de Alta Performance e Gestão de Google Ads. Colocamos a sua empresa na primeira página do Google pronta para vender mais.</p>
-                <a href="#contato" class="cta-button">Falar com Especialista ➔</a>
-            </div>
-        </section>
-        
-        <!-- QUEM SOMOS (ANTIGO SOBRE MIM) -->
-        <section id="sobre" class="asymmetric-section section-right">
-            <h2 class="section-title">Quem Somos</h2>
-            <div class="skills-grid">
-                <div class="skill-card">
-                    <div class="card-triangle"></div>
-                    <div class="skill-icon">🏢</div>
-                    <h3>A Agência FKS</h3>
-                    <p>Somos uma agência de tecnologia especializada em transformar ideias em plataformas de alta conversão. Desenvolvemos sites rápidos, modernos e focados em gerar leads qualificados para o seu negócio.</p>
                 </div>
-                <div class="skill-card card-offset">
-                    <div class="card-triangle"></div>
-                    <div class="skill-icon">⚡</div>
-                    <h3>Velocidade Extrema</h3>
-                    <p>De que adianta uma página bonita se ela não carrega? Nossos projetos são estruturados com código limpo e otimizado para atingir nota máxima de performance e velocidade.</p>
-                </div>
-            </div>
-        </section>
-        
-        <!-- O NOSSO DIFERENCIAL (ANTIGO HABILIDADES TÉCNICAS) -->
-        <section id="diferenciais" class="asymmetric-section section-right">
-            <h2 class="section-title">Nossos Diferenciais</h2>
-            <div class="skills-grid">
-                <div class="skill-card card-offset">
-                    <div class="card-triangle"></div>
-                    <div class="skill-icon">📈</div>
-                    <h3>Nascido para o Google</h3>
-                    <p>Todas as nossas estruturas técnicas são perfeitamente integradas com SEO e configuradas para campanhas de Google Ads e Meta Ads, prontas para converter cliques em vendas diárias.</p>
-                </div>
-                <div class="skill-card">
-                    <div class="card-triangle"></div>
-                    <div class="skill-icon">📱</div>
-                    <h3>Perfeito em Qualquer Tela</h3>
-                    <p>Garantimos uma experiência impecável em smartphones, tablets e computadores. Sites 100% responsivos com botões estratégicos de WhatsApp e formulários de contato rápidos.</p>
-                </div>
-            </div>
-        </section>
-        
-        <!-- OPÇÕES DE PRODUTOS / TABELA DE VALORES -->
-        <section id="servicos" class="asymmetric-section ">
-            <h2 class="section-title">Soluções & Valores</h2>
-            <div class="projects-grid">
-                
-                <div class="project-card">
-                    <div class="project-image">🖥️</div>
-                    <div class="project-info">
-                        <h3>Criação de Sites Profissionais</h3>
-                        <p>Sites institucionais e Landing Pages focados em conversão de clientes. Incluso botão de WhatsApp e estrutura de SEO avançada.</p>
-                        <div class="tech-tags">
-                            <span class="tag">A partir de R$ 499</span>
-                            <span class="tag">Até 5 Páginas</span>
-                            <span class="tag">Entrega Rápida</span>
-                        </div>
+                <div class="hero-visual" data-animate="fade-left">
+                    <div class="visual-grid">
+                        <div class="grid-item item-1" style="background-image: url('midia/images.jpg'); background-size: cover; background-position: center;"></div>
+                        <div class="grid-item item-2" style="background-image: url('midia/images1.jpg'); background-size: cover; background-position: center;"></div>
+                        <div class="grid-item item-3" style="background-image: url('midia/images2.jpg'); background-size: cover; background-position: center;"></div>
+                        <div class="grid-item item-4" style="background-image: url('midia/images3.jpg'); background-size: cover; background-position: center;"></div>
+                        <div class="grid-item item-5" style="background-image: url('midia/images4.jpg'); background-size: cover; background-position: center;"></div>
+                        <div class="grid-item item-6"></div>
+                    </div>
+                    <div class="floating-card card-1">
+                        <div class="card-icon">🎨</div>
+                        <span>Design Tokens</span>
+                    </div>
+                    <div class="floating-card card-2">
+                        <div class="card-icon">⚡</div>
+                        <span>Performance</span>
+                    </div>
+                    <div class="floating-card card-3">
+                        <div class="card-icon">🔄</div>
+                        <span>Consistência</span>
                     </div>
                 </div>
-                
-                <div class="project-card large-card">
-                    <div class="project-image">🚀</div>
-                    <div class="project-info">
-                        <h3>Gestão de Tráfego & Sistemas</h3>
-                        <p>Criação de anúncios estratégicos no Google Ads/Meta Ads para atrair clientes diariamente, além de integrações, automações e sistemas personalizados.</p>
-                        <div class="tech-tags">
-                            <span class="tag">Google Ads</span>
-                            <span class="tag">Meta Ads</span>
-                            <span class="tag">Automações n8n</span>
-                            <span class="tag">Sistemas Web</span>
-                        </div>
-                    </div>
-                </div>
-                
-            </div>
-        </section>
-        
-        <!-- GALERIA DE PROJETOS / PORTFÓLIO DA AGÊNCIA -->
-        <section id="portfolio" class="asymmetric-section ">
-            
-            <div class="matrix-scanner"></div>
-            
-            <div class="section-header-block">
-                <span class="section-index">// CORE_CAPABILITIES_2026</span>
-                <h2 class="section-title">Galeria de Projetos</h2>
             </div>
             
-            <div class="matrix-stack-container">
-                
-                <div class="matrix-row row-offset">
-                    <div class="matrix-id">01</div>
-                    <div class="matrix-content-block">
-                        <div class="matrix-meta">
-                            <span class="matrix-tag tag-purple">Frontend Architecture</span>
-                            <span class="matrix-status">ONLINE</span>
-                        </div>
-                        <h3>Sistemas Visuais & Landing Pages</h3>
-                        <p>Portfólio de sites modernos entregues para clínicas, escritórios de advocacia, consultórios, engenharia e comércios locais.</p>
-                    </div>
-                    <div class="matrix-icon">🎨</div>
-                    <div class="matrix-corner-glitch"></div>
+        </section>
+
+        <section class="about" id="about">
+            <div class="container">
+                <div class="section-header" data-animate="fade-up">
+                    <span class="section-tag">Sobre Nós</span>
+                    <h2 class="section-title">Design que Conecta,<br>Sistemas que Escalam</h2>
                 </div>
-                
-                <div class="matrix-row">
-                    <div class="matrix-id">02</div>
-                    <div class="matrix-content-block">
-                        <div class="matrix-meta">
-                            <span class="matrix-tag tag-blue">Sistemas & Tráfego Pago</span>
-                            <span class="matrix-status">ONLINE</span>
-                        </div>
-                        <h3>Engenharia de Dados, APIs & Google Ads</h3>
-                        <p>Desenvolvimento de painéis integrados, automação de fluxos de atendimento e gerenciamento de campanhas focadas em ROI.</p>
+                <div class="about-grid">
+                    <div class="about-card" data-animate="fade-up" data-delay="100">
+                        <div class="card-number">01</div>
+                        <h3>Identidade Visual</h3>
+                        <p>Criamos identidades visuais únicas que capturam a essência da sua marca e geram conexão emocional com seu público.</p>
                     </div>
-                    <div class="matrix-icon">⚙️</div>
-                    <div class="matrix-corner-glitch"></div>
+                    <div class="about-card" data-animate="fade-up" data-delay="200">
+                        <div class="card-number">02</div>
+                        <h3>Design Systems</h3>
+                        <p>Desenvolvemos ecossistemas de design completos com componentes reutilizáveis, tokens e documentação viva.</p>
+                    </div>
+                    <div class="about-card" data-animate="fade-up" data-delay="300">
+                        <div class="card-number">03</div>
+                        <h3>Experiência Digital</h3>
+                        <p>Interfaces intuitivas e acessíveis que convertem visitantes em clientes fiéis através de UX estratégico.</p>
+                    </div>
                 </div>
-                
             </div>
         </section>
-        
-        <!-- CONTATO CORPORATIVO -->
-        <section id="contato" class="contact-section">
-            <h2 class="section-title">Fale com a nossa Equipe</h2>
-            <p class="contact-subtitle">Estamos prontos para desenhar a estratégia ideal para o crescimento da sua empresa.</p>
-            <div class="contact-links">
-                <a href="mailto:contato@forwardkeysolutions.com" class="contact-link">
-                    <span>📧</span> E-mail Corporativo
-                </a>
-                <a href="https://wa.me/seunumerodeaudiencia" target="_blank" class="contact-link">
-                    <span>📱</span> WhatsApp Comercial
-                </a>
-                <a href="https://linkedin.com/company/forwardkeysolutions" target="_blank" class="contact-link">
-                    <span>💼</span> LinkedIn Corp
-                </a>
-                <a href="https://github.com/seuusuario" target="_blank" class="contact-link">
-                    <span>💻</span> GitHub FKS Labs
-                </a>
+
+        <section class="services" id="services">
+            <div class="container">
+                <div class="section-header" data-animate="fade-up">
+                    <span class="section-tag">Serviços</span>
+                    <h2 class="section-title">Soluções Completas<br>para sua Marca</h2>
+                </div>
+                <div class="services-grid">
+                    <div class="service-card large" data-animate="fade-up">
+                        <div class="service-icon">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <rect x="3" y="3" width="18" height="18" rx="2"/>
+                                <path d="M3 9h18M9 21V9"/>
+                            </svg>
+                        </div>
+                        <h3>Design Systems</h3>
+                        <p>Ecossistemas visuais completos com componentes modulares, tokens de design, guidelines de uso e documentação interativa que garantem consistência em toda a sua presença digital.</p>
+                        <ul class="service-features">
+                            <li>Component Library</li>
+                            <li>Design Tokens</li>
+                            <li>Documentation</li>
+                            <li>Governance</li>
+                        </ul>
+                    </div>
+                    <div class="service-card" data-animate="fade-up" data-delay="100">
+                        <div class="service-icon">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M12 6v6l4 2"/>
+                            </svg>
+                        </div>
+                        <h3>Brand Identity</h3>
+                        <p>Identidades visuais memoráveis que comunicam os valores da marca e criam conexão emocional.</p>
+                    </div>
+                    <div class="service-card" data-animate="fade-up" data-delay="200">
+                        <div class="service-icon">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                                <path d="M2 17l10 5 10-5M2 12l10 5 10-5"/>
+                            </svg>
+                        </div>
+                        <h3>UI/UX Design</h3>
+                        <p>Interfaces intuitivas e acessíveis focadas em conversão e experiência do usuário.</p>
+                    </div>
+                    <div class="service-card" data-animate="fade-up" data-delay="300">
+                        <div class="service-icon">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                                <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+                                <line x1="12" y1="22.08" x2="12" y2="12"/>
+                            </svg>
+                        </div>
+                        <h3>Desenvolvimento</h3>
+                        <p>Implementação front-end com as melhores práticas e performance otimizada.</p>
+                    </div>
+                </div>
             </div>
         </section>
-        
-        <footer>
-            <p>&copy; 2026 Forward Key Solutions | IMPRESSIONART INSPIRATION. Todos os direitos reservados. FKS LTDA.</p>
-        </footer>
-        
+
+        <section class="portfolio" id="portfolio">
+            <div class="container">
+                <div class="section-header" data-animate="fade-up">
+                    <span class="section-tag">Portfólio</span>
+                    <h2 class="section-title">Projetos que<br>Transformaram Marcas</h2>
+                </div>
+                <div class="portfolio-grid">
+                    <div class="portfolio-item" data-animate="fade-up">
+                        <div class="portfolio-image" style="background-image: url('midia/comanda.jpg'); background-size: cover; background-position: center;">
+                            <span class="portfolio-category">Sistema Híbrido</span>
+                        </div>
+                        <div class="portfolio-info">
+                            <h3>Comandas Híbridas</h3>
+                            <p>Sistema completo de comandas para restaurantes e bares com app mobile e painel web integrado.</p>
+                        </div>
+                    </div>
+                    <div class="portfolio-item" data-animate="fade-up" data-delay="100">
+                        <div class="portfolio-image" style="background-image: url('midia/convites.jpg'); background-size: cover; background-position: center;">
+                            <span class="portfolio-category">Convites</span>
+                        </div>
+                        <div class="portfolio-info">
+                            <h3>Convites Personalizados</h3>
+                            <p>Design de convites digitais e impressos para eventos, casamentos e empresas.</p>
+                        </div>
+                    </div>
+                    <div class="portfolio-item" data-animate="fade-up" data-delay="200">
+                        <div class="portfolio-image" style="background-image: url('midia/site.jpg'); background-size: cover; background-position: center;">
+                            <span class="portfolio-category">Desenvolvimento</span>
+                        </div>
+                        <div class="portfolio-info">
+                            <h3>Sites Institucionais</h3>
+                            <p>Desenvolvimento de sites profissionais com SEO otimizado e performance avançada.</p>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </section>
+
+        <section class="contact" id="contact">
+            <div class="container">
+                <div class="contact-wrapper">
+                    <div class="contact-content" data-animate="fade-up">
+                        <span class="section-tag">Contato</span>
+                        <h2 class="section-title">Vamos Criar<br>Algo Incrível?</h2>
+                        <p>Pronto para transformar sua marca? Entre em contato e vamos discutir como podemos ajudar seu negócio a escalar com design systems inteligentes.</p>
+                        <div class="contact-methods">
+                            <a href="mailto:lucafks00@gmail.com.com" class="contact-method">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                                    <polyline points="22,6 12,13 2,6"/>
+                                </svg>
+                                <span>contato@desysis.com</span>
+                            </a>
+                            <a href="https://wa.me/5581987900427" target="_blank" class="contact-method">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+                                </svg>
+                                <span>WhatsApp</span>
+                            </a>
+                            <!-- <a href="https://linkedin.com/company/desysis" target="_blank" class="contact-method">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                                    <rect x="2" y="9" width="4" height="12"/>
+                                    <circle cx="4" cy="4" r="2"/>
+                                </svg>
+                                <span>LinkedIn</span>
+                            </a> -->
+                        </div>
+                    </div>
+                    <!-- <form class="contact-form" data-animate="fade-up" data-delay="200">
+                        <div class="form-group">
+                            <input type="text" id="name" required placeholder=" ">
+                            <label for="name">Nome</label>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" id="email" required placeholder=" ">
+                            <label for="email">Email</label>
+                        </div>
+                        <div class="form-group">
+                            <textarea id="message" rows="4" required placeholder=" "></textarea>
+                            <label for="message">Mensagem</label>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-full">
+                            <span>Enviar Mensagem</span>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="22" y1="2" x2="11" y2="13"/>
+                                <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+                            </svg>
+                        </button>
+                    </form> -->
+                </div>
+            </div>
+        </section>
     </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <a href="#" class="logo">
+                        <img src="midia/logodeitada.png" alt="Desysis" class="logo-img logo-footer">
+                    </a>
+                    <p>Design Systems que conectam marcas a pessoas.</p>
+                </div>
+                <div class="footer-links">
+                    <a href="#home">Início</a>
+                    <a href="#about">Sobre</a>
+                    <a href="#services">Serviços</a>
+                    <a href="#portfolio">Portfólio</a>
+                    <a href="#contact">Contato</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Desysis. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
     <script src="script.js"></script>
 </body>
 </html>

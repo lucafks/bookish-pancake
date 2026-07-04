@@ -1,117 +1,146 @@
-document.addEventListener("DOMContentLoaded", () => {
-        const brandTitle = document.querySelector('.brand-title');
-        
-        // Executa apenas se for mobile/tablet (telas menores ou iguais a 992px)
-        if (window.innerWidth <= 992 && brandTitle) {
-            
-            window.addEventListener('scroll', () => {
-                // Se o usuário rolar mais do que 40 pixels para baixo, o texto abre
-                if (window.scrollY > 40) {
-                    brandTitle.classList.add('active');
-                } else {
-                    // Se ele voltar para o topo do site, o texto fecha de novo
-                    brandTitle.classList.remove('active');
-                }
+document.addEventListener('DOMContentLoaded', () => {
+    const header = document.querySelector('.header');
+
+    window.addEventListener('scroll', () => {
+        header.classList.toggle('scrolled', window.pageYOffset > 50);
+    }, { passive: true });
+
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+
+    if (menuToggle && navLinks) {
+        menuToggle.addEventListener('click', () => {
+            const isActive = menuToggle.classList.toggle('active');
+            navLinks.classList.toggle('active');
+            document.body.style.overflow = isActive ? 'hidden' : '';
+        });
+
+        navLinks.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                menuToggle.classList.remove('active');
+                navLinks.classList.remove('active');
+                document.body.style.overflow = '';
             });
-            
-        }
+        });
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
     });
 
+    const navLinkItems = document.querySelectorAll('.nav-link');
+    const sections = document.querySelectorAll('section[id]');
 
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+        if (!ticking) {
+            requestAnimationFrame(() => {
+                const scrollPos = window.pageYOffset + 200;
+                sections.forEach(section => {
+                    const { top, height, id } = section.getBoundingClientRect();
+                    const sectionTop = top + window.pageYOffset;
+                    if (scrollPos >= sectionTop && scrollPos < sectionTop + height) {
+                        navLinkItems.forEach(link => {
+                            link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+                        });
+                    }
+                });
+                ticking = false;
+            });
+            ticking = true;
+        }
+    }, { passive: true });
 
-
-
-
-document.addEventListener('DOMContentLoaded', () => {
-    const menuToggle = document.querySelector('.menu-toggle');
-    const header = document.querySelector('header');
-
-    if (menuToggle && header) {
-        let startX = 0;
-        let startY = 0;
-        let currentX = 0;
-        let isDragging = false;
-        let isHorizontalSwipe = false;
-        const menuWidth = 280;
-
-        // --- 1. CLIQUE TRADICIONAL DO BOTÃO ---
-        menuToggle.addEventListener('click', () => {
-            header.style.transition = "transform 0.4s cubic-bezier(0.19, 1, 0.22, 1)";
-            menuToggle.classList.toggle('active');
-            header.classList.toggle('active');
-            
-            if (!header.classList.contains('active')) {
-                header.style.transform = '';
-            } else {
-                header.style.transform = 'translateX(0px)';
+    const animateElements = document.querySelectorAll('[data-animate]');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                setTimeout(() => {
+                    entry.target.classList.add('visible');
+                }, parseInt(entry.target.dataset.delay || 0));
+                observer.unobserve(entry.target);
             }
         });
+    }, { threshold: 0.1 });
 
-        // --- 2. ANIMAÇÃO EM TEMPO REAL COM BLOQUEIO DE SCROLL ---
-        
-        header.addEventListener('touchstart', (e) => {
-            if (!header.classList.contains('active')) return;
-            
-            startX = e.touches[0].clientX;
-            startY = e.touches[0].clientY;
-            isDragging = true;
-            isHorizontalSwipe = false; // Reseta a validação de direção
-            
-            header.style.transition = 'none';
-        }, { passive: true });
+    animateElements.forEach(el => observer.observe(el));
 
-        header.addEventListener('touchmove', (e) => {
-            if (!isDragging) return;
+    const statNumbers = document.querySelectorAll('.stat-number');
+    const statsObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const el = entry.target;
+                const target = parseInt(el.dataset.count);
+                const suffix = target === 98 ? '%' : '+';
+                const duration = 2000;
+                const start = performance.now();
 
-            currentX = e.touches[0].clientX;
-            let currentY = e.touches[0].clientY;
-            
-            let offsetX = currentX - startX;
-            let offsetY = currentY - startY;
-
-            // Detecta se o usuário está movendo mais para os lados do que para cima/baixo
-            if (!isHorizontalSwipe) {
-                // Se o movimento horizontal for maior que o vertical, é um arrasto de menu
-                if (Math.abs(offsetX) > Math.abs(offsetY)) {
-                    isHorizontalSwipe = true;
-                } else {
-                    isDragging = false; // É um scroll vertical, cancela o arrasto do menu
-                    return;
+                function update(now) {
+                    const progress = Math.min((now - start) / duration, 1);
+                    const eased = 1 - Math.pow(1 - progress, 3);
+                    el.textContent = Math.floor(target * eased) + (progress >= 1 ? suffix : '');
+                    if (progress < 1) requestAnimationFrame(update);
                 }
-            }
-
-            // Se for um arrasto do menu, para o scroll do fundo da página imediatamente!
-            if (isHorizontalSwipe) {
-                if (e.cancelable) e.preventDefault(); 
-                
-                // Trava os limites do arrasto para não quebrar o layout
-                if (offsetX > 0) offsetX = 0;
-                if (offsetX < -menuWidth) offsetX = -menuWidth;
-
-                header.style.transform = `translateX(${offsetX}px)`;
-            }
-        }, { passive: false }); // ATENÇÃO: passive false aqui é obrigatório para o preventDefault funcionar
-
-        header.addEventListener('touchend', (e) => {
-            if (!isDragging && !isHorizontalSwipe) return;
-            isDragging = false;
-
-            header.style.transition = "transform 0.4s cubic-bezier(0.19, 1, 0.22, 1)";
-
-            let finalOffsetX = currentX - startX;
-
-            // Se arrastou mais de 70px para a esquerda, fecha tudo
-            if (isHorizontalSwipe && finalOffsetX < -70) {
-                header.classList.remove('active');
-                menuToggle.classList.remove('active');
-                header.style.transform = '';
-            } else {
-                // Se soltou antes, gruda de volta na tela
-                header.style.transform = 'translateX(0px)';
+                requestAnimationFrame(update);
+                statsObserver.unobserve(el);
             }
         });
+    }, { threshold: 0.5 });
 
-    } else {
-        console.error("Erro: .menu-toggle ou header não foram encontrados no HTML.");
+    statNumbers.forEach(num => statsObserver.observe(num));
+
+    const contactForm = document.querySelector('.contact-form');
+    if (contactForm) {
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const btn = contactForm.querySelector('button[type="submit"]');
+            const originalHTML = btn.innerHTML;
+            btn.innerHTML = '<span>Enviado!</span>';
+            btn.style.background = 'linear-gradient(135deg, #22c55e, #16a34a)';
+            setTimeout(() => {
+                btn.innerHTML = originalHTML;
+                btn.style.background = '';
+                contactForm.reset();
+            }, 3000);
+        });
     }
+
+    const titleLines = document.querySelectorAll('.title-line');
+    titleLines.forEach((line, i) => {
+        line.style.opacity = '0';
+        line.style.transform = 'translateY(20px)';
+        setTimeout(() => {
+            line.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            line.style.opacity = '1';
+            line.style.transform = 'translateY(0)';
+        }, 100 + i * 150);
+    });
+
+    const gridItems = document.querySelectorAll('.grid-item');
+    gridItems.forEach((item, i) => {
+        item.style.opacity = '0';
+        item.style.transform = 'scale(0.8)';
+        setTimeout(() => {
+            item.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            item.style.opacity = '1';
+            item.style.transform = 'scale(1)';
+        }, 500 + i * 100);
+    });
+
+    const floatingCards = document.querySelectorAll('.floating-card');
+    floatingCards.forEach((card, i) => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(20px)';
+        setTimeout(() => {
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            card.style.opacity = '1';
+            card.style.transform = 'translateY(0)';
+        }, 800 + i * 200);
+    });
 });
