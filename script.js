@@ -1,5 +1,39 @@
 document.addEventListener('DOMContentLoaded', () => {
 
+    /* === Theme Toggle === */
+    const html = document.documentElement;
+    const themeToggle = document.querySelector('.theme-toggle');
+
+    function getPreferredTheme() {
+        const saved = localStorage.getItem('theme');
+        if (saved) return saved;
+        return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+    }
+
+    function setTheme(theme, animate = true) {
+        if (animate) {
+            html.classList.add('theme-transition');
+            setTimeout(() => html.classList.remove('theme-transition'), 350);
+        }
+        html.setAttribute('data-theme', theme);
+        localStorage.setItem('theme', theme);
+    }
+
+    setTheme(getPreferredTheme(), false);
+
+    if (themeToggle) {
+        themeToggle.addEventListener('click', () => {
+            const current = html.getAttribute('data-theme');
+            setTheme(current === 'dark' ? 'light' : 'dark');
+        });
+    }
+
+    window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', (e) => {
+        if (!localStorage.getItem('theme')) {
+            setTheme(e.matches ? 'light' : 'dark');
+        }
+    });
+
     /* === Navigation === */
     const header = document.querySelector('.header');
 
@@ -9,22 +43,67 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const menuToggle = document.querySelector('.menu-toggle');
     const navLinks = document.querySelector('.nav-links');
+    let lastFocusedElement = null;
+
+    function openMenu() {
+        menuToggle.classList.add('active');
+        menuToggle.setAttribute('aria-expanded', 'true');
+        menuToggle.setAttribute('aria-label', 'Fechar menu');
+        navLinks.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        lastFocusedElement = document.activeElement;
+        const firstLink = navLinks.querySelector('.nav-link');
+        if (firstLink) firstLink.focus();
+    }
+
+    function closeMenu() {
+        menuToggle.classList.remove('active');
+        menuToggle.setAttribute('aria-expanded', 'false');
+        menuToggle.setAttribute('aria-label', 'Abrir menu');
+        navLinks.classList.remove('active');
+        document.body.style.overflow = '';
+        if (lastFocusedElement) lastFocusedElement.focus();
+    }
 
     if (menuToggle && navLinks) {
         menuToggle.addEventListener('click', () => {
-            const isActive = menuToggle.classList.toggle('active');
-            navLinks.classList.toggle('active');
-            document.body.style.overflow = isActive ? 'hidden' : '';
+            if (menuToggle.classList.contains('active')) {
+                closeMenu();
+            } else {
+                openMenu();
+            }
         });
 
         navLinks.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('click', () => {
-                menuToggle.classList.remove('active');
-                navLinks.classList.remove('active');
-                document.body.style.overflow = '';
-            });
+            link.addEventListener('click', closeMenu);
+        });
+
+        navLinks.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeMenu();
+                return;
+            }
+            if (e.key !== 'Tab') return;
+
+            const focusable = navLinks.querySelectorAll('.nav-link, .theme-toggle');
+            const first = focusable[0];
+            const last = focusable[focusable.length - 1];
+
+            if (e.shiftKey && document.activeElement === first) {
+                e.preventDefault();
+                last.focus();
+            } else if (!e.shiftKey && document.activeElement === last) {
+                e.preventDefault();
+                first.focus();
+            }
         });
     }
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && navLinks && navLinks.classList.contains('active')) {
+            closeMenu();
+        }
+    });
 
     /* === Smooth Scroll === */
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -51,7 +130,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     const sectionTop = top + window.pageYOffset;
                     if (scrollPos >= sectionTop && scrollPos < sectionTop + height) {
                         navLinkItems.forEach(link => {
-                            link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+                            const isActive = link.getAttribute('href') === '#' + id;
+                            link.classList.toggle('active', isActive);
+                            if (isActive) {
+                                link.setAttribute('aria-current', 'page');
+                            } else {
+                                link.removeAttribute('aria-current');
+                            }
                         });
                     }
                 });

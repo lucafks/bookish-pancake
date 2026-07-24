@@ -20,6 +20,56 @@
     --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     --font-display: 'Space Grotesk', 'Inter', sans-serif;
     --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --header-scrolled-bg: rgba(9, 9, 11, 0.95);
+    --mobile-nav-bg: rgba(9, 9, 11, 0.98);
+    --floating-card-bg: rgba(24, 24, 27, 0.95);
+    --card-hover-bg: rgba(168, 85, 247, 0.05);
+    --contact-hover-bg: rgba(168, 85, 247, 0.1);
+    --portfolio-category-bg: rgba(0, 0, 0, 0.5);
+    --portfolio-info-gradient: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+    --service-feature-bg: rgba(255, 255, 255, 0.15);
+}
+
+[data-theme="light"] {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8f9fa;
+    --bg-tertiary: #e9ecef;
+    --text-primary: #09090b;
+    --text-secondary: #52525b;
+    --text-muted: #71717a;
+    --border: rgba(0, 0, 0, 0.08);
+    --glass: rgba(0, 0, 0, 0.02);
+    --glass-border: rgba(0, 0, 0, 0.06);
+    --header-scrolled-bg: rgba(255, 255, 255, 0.95);
+    --mobile-nav-bg: rgba(255, 255, 255, 0.98);
+    --floating-card-bg: rgba(255, 255, 255, 0.95);
+    --card-hover-bg: rgba(168, 85, 247, 0.06);
+    --contact-hover-bg: rgba(168, 85, 247, 0.08);
+    --portfolio-category-bg: rgba(255, 255, 255, 0.7);
+    --portfolio-info-gradient: linear-gradient(to top, rgba(255, 255, 255, 0.95), transparent);
+    --service-feature-bg: rgba(0, 0, 0, 0.08);
+}
+
+@media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) {
+        --bg-primary: #ffffff;
+        --bg-secondary: #f8f9fa;
+        --bg-tertiary: #e9ecef;
+        --text-primary: #09090b;
+        --text-secondary: #52525b;
+        --text-muted: #71717a;
+        --border: rgba(0, 0, 0, 0.08);
+        --glass: rgba(0, 0, 0, 0.02);
+        --glass-border: rgba(0, 0, 0, 0.06);
+        --header-scrolled-bg: rgba(255, 255, 255, 0.95);
+        --mobile-nav-bg: rgba(255, 255, 255, 0.98);
+        --floating-card-bg: rgba(255, 255, 255, 0.95);
+        --card-hover-bg: rgba(168, 85, 247, 0.06);
+        --contact-hover-bg: rgba(168, 85, 247, 0.08);
+        --portfolio-category-bg: rgba(255, 255, 255, 0.7);
+        --portfolio-info-gradient: linear-gradient(to top, rgba(255, 255, 255, 0.95), transparent);
+        --service-feature-bg: rgba(0, 0, 0, 0.08);
+    }
 }
 
 *, *::before, *::after {
@@ -32,6 +82,14 @@
 html {
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
+    scroll-padding-top: 100px;
+}
+
+html.theme-transition,
+html.theme-transition *,
+html.theme-transition *::before,
+html.theme-transition *::after {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease !important;
 }
 
 body {
@@ -44,6 +102,32 @@ body {
 
 a { color: inherit; text-decoration: none; }
 ul { list-style: none; }
+
+/* === Skip Link === */
+.skip-link {
+    position: fixed;
+    top: -100%;
+    left: 16px;
+    z-index: 200;
+    padding: 12px 24px;
+    background: var(--accent);
+    color: white;
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    font-size: 0.875rem;
+    transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+    top: 16px;
+}
+
+/* === Focus States === */
+:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    border-radius: 4px;
+}
 
 /* === Layout === */
 .container {
@@ -90,7 +174,9 @@ ul { list-style: none; }
 }
 
 .header.scrolled {
-    background: rgba(9, 9, 11, 0.95);
+    background: var(--header-scrolled-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--border);
     padding: 16px 0;
 }
@@ -137,6 +223,45 @@ ul { list-style: none; }
 .nav-link:hover, .nav-link.active {
     color: var(--text-primary);
     background: var(--glass);
+}
+
+/* Theme Toggle */
+.theme-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    border-radius: 50%;
+    cursor: pointer;
+    color: var(--text-secondary);
+    transition: var(--transition);
+    margin-left: 8px;
+    flex-shrink: 0;
+}
+
+.theme-toggle:hover {
+    color: var(--text-primary);
+    background: var(--card-hover-bg);
+    border-color: var(--accent);
+}
+
+.theme-toggle svg {
+    width: 20px;
+    height: 20px;
+}
+
+.theme-toggle .icon-sun { display: none; }
+.theme-toggle .icon-moon { display: block; }
+
+[data-theme="light"] .theme-toggle .icon-sun { display: block; }
+[data-theme="light"] .theme-toggle .icon-moon { display: none; }
+
+@media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) .theme-toggle .icon-sun { display: block; }
+    :root:not([data-theme="dark"]) .theme-toggle .icon-moon { display: none; }
 }
 
 .menu-toggle {
@@ -292,6 +417,7 @@ ul { list-style: none; }
     border-radius: var(--radius-md);
     transition: var(--transition);
     overflow: hidden;
+    contain: layout style paint;
 }
 
 .grid-item[style*="background-image"] {
@@ -312,10 +438,11 @@ ul { list-style: none; }
     align-items: center;
     gap: 12px;
     padding: 16px 20px;
-    background: rgba(24, 24, 27, 0.95);
+    background: var(--floating-card-bg);
     border: 1px solid var(--glass-border);
     border-radius: var(--radius-md);
-    will-change: transform;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
 }
 
 .card-icon {
@@ -385,10 +512,11 @@ ul { list-style: none; }
     border-radius: var(--radius-lg);
     transition: var(--transition);
     overflow: hidden;
+    contain: layout style paint;
 }
 
 .about-card:hover {
-    background: rgba(168, 85, 247, 0.05);
+    background: var(--card-hover-bg);
     border-color: var(--accent);
     transform: translateY(-4px);
 }
@@ -433,6 +561,7 @@ ul { list-style: none; }
     border-radius: var(--radius-lg);
     transition: var(--transition);
     overflow: hidden;
+    contain: layout style paint;
 }
 
 .service-card.large {
@@ -461,14 +590,14 @@ ul { list-style: none; }
 
 .service-features li {
     padding: 6px 14px;
-    background: rgba(255, 255, 255, 0.15);
+    background: var(--service-feature-bg);
     border-radius: 100px;
     font-size: 0.8125rem;
     font-weight: 500;
 }
 
 .service-card:not(.large):hover {
-    background: rgba(168, 85, 247, 0.05);
+    background: var(--card-hover-bg);
     border-color: var(--accent);
     transform: translateY(-4px);
 }
@@ -507,6 +636,7 @@ ul { list-style: none; }
     border-radius: var(--radius-lg);
     overflow: hidden;
     transition: var(--transition);
+    cursor: pointer;
 }
 
 .portfolio-item:hover { transform: translateY(-8px); }
@@ -523,11 +653,13 @@ ul { list-style: none; }
 
 .portfolio-category {
     padding: 6px 14px;
-    background: rgba(0, 0, 0, 0.5);
+    background: var(--portfolio-category-bg);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
     border-radius: 100px;
     font-size: 0.75rem;
     font-weight: 500;
-    color: white;
+    color: var(--text-primary);
     transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
@@ -542,7 +674,7 @@ ul { list-style: none; }
     left: 0;
     right: 0;
     padding: 32px 24px 24px;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+    background: var(--portfolio-info-gradient);
     transform: translateY(20px);
     opacity: 0;
     transition: var(--transition);
@@ -593,7 +725,7 @@ ul { list-style: none; }
 }
 
 .contact-method:hover {
-    background: rgba(168, 85, 247, 0.1);
+    background: var(--contact-hover-bg);
     border-color: var(--accent);
     color: var(--text-primary);
 }
@@ -628,6 +760,7 @@ ul { list-style: none; }
 .form-group input:focus,
 .form-group textarea:focus {
     border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.15);
 }
 
 .form-group label {
@@ -747,6 +880,38 @@ ul { list-style: none; }
     50% { opacity: 0.5; }
 }
 
+/* === Content Visibility (Performance) === */
+.about,
+.services,
+.portfolio,
+.contact {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 600px;
+}
+
+/* === Reduced Motion === */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    html { scroll-behavior: auto; }
+
+    [data-animate] {
+        opacity: 1;
+        transform: none;
+    }
+
+    .portfolio-item:hover { transform: none; }
+    .portfolio-item:hover .portfolio-image { transform: none; }
+    .about-card:hover { transform: none; }
+    .service-card:hover { transform: none; }
+    .btn-primary:hover { transform: none; }
+    .scroll-top:hover { transform: none; }
+}
+
 /* === Responsive === */
 @media (max-width: 968px) {
     .hero .container {
@@ -769,7 +934,9 @@ ul { list-style: none; }
         flex-direction: column;
         justify-content: center;
         gap: 8px;
-        background: rgba(9, 9, 11, 0.98);
+        background: var(--mobile-nav-bg);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
         opacity: 0;
         visibility: hidden;
         transition: var(--transition);
